@@ -21,9 +21,9 @@ export default function Products() {
         <main>
             <Container>
                 <Row className='justify-content-center'>
-                    {products.map((product) => (
+                    {products.map((product, index) => (
                         <Col className='m-2' key={product.id} xs='12' sm='6' md='4' lg='3'>
-                            <Product product={product}/>
+                            <Product key={index} product={product}/>
                         </Col>
                     ))}
                 </Row>
