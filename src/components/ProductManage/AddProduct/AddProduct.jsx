@@ -100,8 +100,6 @@ export default function AddProduct() {
         console.log(productItem)
 
         postProductToDb(productItem)
-
-        e.preventDefault();
     }
 
     const postProductToDb = (productItem) => {

@@ -7,9 +7,10 @@ import './Style.css'
 
 
 export default function Product({ product }) {
+    const image = "data:image/png;base64," + product.image
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="https://picsum.photos/300/200" />
+            <Card.Img variant="top" src={image} />
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>
