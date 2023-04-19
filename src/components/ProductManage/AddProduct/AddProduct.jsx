@@ -49,9 +49,9 @@ export default function AddProduct() {
 
         console.log(categories)
         setCategories(categories);
-        setCategory(categories[0])
+        // setCategory(categories[0])
     }
-
+    
     const fetchSubCategories = () => {
         let subCategories = [];
         product.forEach((pd) => {
@@ -63,15 +63,20 @@ export default function AddProduct() {
         setSubCategories(subCategories)
         setSubCategory(subCategories[0])
     }
-
+    
     useEffect(() => {
         fetchCategories()
         document.title = "Add Product"
     }, [])
-
+    
     useEffect(() => {
         fetchSubCategories()
+        setProductItem({ ...productItem, category: category})
     }, [category])
+
+    useEffect(() => {
+        setProductItem({ ...productItem, subcategory: subCategory})
+    }, [subCategory])
 
     const imageChangeHandle = (event) => {
         const choosedFile = event.target.files[0];
@@ -91,20 +96,11 @@ export default function AddProduct() {
 
     // product form submit handler
     const submitHandler = (e) => {
-        let subCat = []
-
-        subCategory.forEach(cat => {
-            if (String(cat).length > 1) {
-                subCat.push(cat);
-            }
-        })
-
-        setProductItem({ ...productItem, category: category, subcategory: subCat })
 
         console.log(productItem)
-        if (productItem.category !== '' && subCat.length > 0) {
-            postProductToDb(productItem)
-        }
+
+        postProductToDb(productItem)
+
         e.preventDefault();
     }
 
@@ -197,7 +193,7 @@ export default function AddProduct() {
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="category">Category: </Form.Label>
                         <Form.Select required id='category' onChange={(e) => setCategory(e.target.value)} aria-describedby='categoryHelpBlock'>
-                            {/* <option value={category}>{category}</option> */}
+                            <option value=''>Choose Category</option>
                             {categories.map((cat, index) => (
                                 <option key={index} value={cat}>{cat}</option>
                             ))}
