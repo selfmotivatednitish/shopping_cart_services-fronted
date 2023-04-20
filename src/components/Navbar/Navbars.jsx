@@ -18,10 +18,11 @@ export default function Navbars() {
                         <LinkContainer to="/">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
+
                         <LinkContainer to="/addProducts" >
                             <Nav.Link>Add Product</Nav.Link>
                         </LinkContainer>
-                        
+
                         <Form className="d-flex">
                             <Form.Control
                                 type="search"
@@ -42,9 +43,16 @@ export default function Navbars() {
                             </Badge>
                         </Button>
                     </div>
-                    <div>
-                        Guest
-                    </div>
+                    <Nav>
+                        <LinkContainer to="/signup" >
+                            <Nav.Link>Signup</Nav.Link>
+                        </LinkContainer>
+                    </Nav>
+                    <Nav>
+                        <LinkContainer to="/signup" >
+                            <Nav.Link>Guest</Nav.Link>
+                        </LinkContainer>
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>

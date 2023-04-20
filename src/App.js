@@ -1,4 +1,4 @@
-import { AddProduct, Products, Navbar } from './components'
+import { AddProduct, Products, Navbar, Signup, Signin } from './components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -19,6 +19,20 @@ function App() {
 						element={
 							<>
 								<AddProduct />
+							</>
+						}
+					/>
+					<Route path='/signup'
+						element = {
+							<>
+								<Signup />
+							</>
+						}
+					/>
+					<Route path='/signin'
+						element = {
+							<>
+								<Signin />
 							</>
 						}
 					/>
