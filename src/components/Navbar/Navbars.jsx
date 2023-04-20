@@ -3,6 +3,7 @@ import { ShoppingCart } from '@mui/icons-material'
 import { LinkContainer } from 'react-router-bootstrap'
 
 export default function Navbars() {
+
     return (
         <Navbar fixed='top' bg="light" expand="lg">
             <Container fluid>
@@ -40,6 +41,9 @@ export default function Navbars() {
                                 </span>
                             </Badge>
                         </Button>
+                    </div>
+                    <div>
+                        Guest
                     </div>
                 </Navbar.Collapse>
             </Container>
