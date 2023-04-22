@@ -15,7 +15,6 @@ const product = [
     {
         "category": "books",
         "subCategory": ["fiction", "non-fiction", "children's books", "cookbooks", "self-help"]
-
     },
     {
         "category": "sports",
@@ -95,7 +94,7 @@ export default function AddProduct() {
     }
 
     // product form submit handler
-    const submitHandler = (e) => {
+    const submitHandler = () => {
 
         console.log(productItem)
 

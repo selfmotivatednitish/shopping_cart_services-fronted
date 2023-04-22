@@ -1,4 +1,4 @@
-import { AddProduct, Products, Navbar, Signup, Signin } from './components'
+import { AddProduct, Products, Navbar, Signup, Signin, Profile } from './components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -33,6 +33,38 @@ function App() {
 						element = {
 							<>
 								<Signin />
+							</>
+						}
+					/>
+					<Route path='/profile'
+						element = {
+							<>
+							    <Navbar />
+								<Profile value="login"/>
+							</>
+						}
+					/>
+					<Route path='/profile/addresses'
+						element = {
+							<>
+							    <Navbar />
+								<Profile value="addresses"/>
+							</>
+						}
+					/>
+					<Route path='/profile/orders'
+						element = {
+							<>
+							    <Navbar />
+								<Profile value="orders"/>
+							</>
+						}
+					/>
+					<Route path='/contactus'
+						element = {
+							<>
+							    <Navbar />
+								<Profile value="contactus"/>
 							</>
 						}
 					/>
