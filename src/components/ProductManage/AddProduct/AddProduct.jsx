@@ -117,7 +117,7 @@ export default function AddProduct() {
 
     return (
         <Form onSubmit={submitHandler} className='container'>
-            <h1 class="text-center">Add a Product</h1>
+            <h1 className="text-center">Add a Product</h1>
             <hr />
             <Row className='justify-content-center' >
                 <Col xs={8} md={4}>

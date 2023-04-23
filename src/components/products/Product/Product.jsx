@@ -12,7 +12,8 @@ import AuthContext from "../../Context/AuthProvider";
 export default function Product({ product }) {
   const image = "data:image/png;base64," + product.image
 
-  const product = prd;
+  const {auth, user} = useContext(AuthContext)
+
   const addToCartHandler = () => {
     console.log("Add to cart button pressed")
     if(auth) {
@@ -35,7 +36,7 @@ export default function Product({ product }) {
 
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="https://picsum.photos/300" />
+      <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Title>{product.name}</Card.Title>
         <Card.Text>{product.price}</Card.Text>

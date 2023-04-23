@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Col, Row, Table } from 'react-bootstrap'
+import { Col, Row, Table } from 'react-bootstrap'
 
 export default function Contactus() {
     return (
@@ -11,25 +11,14 @@ export default function Contactus() {
                         <tbody>
                             <tr>
                                 <td>
-                                    <Table className='m-0 p-0'>
-                                        <tr md={9} >
-                                            <td>
-                                                <p className='text-start ps-3 pb-0 m-0'>
-                                                    <b>
-                                                        Name:
-                                                    </b>
-                                                </p>
-                                                <p className='text-start ps-3 pb-0 m-0'>
-                                                    Nitish Kumar
-                                                </p>
-                                            </td>
-                                            <td className='align-middle justify-content-center'>
-                                                <Button variant="outline-warning">
-                                                    Edit
-                                                </Button>{' '}
-                                            </td>
-                                        </tr>
-                                    </Table>
+                                    <p className='text-start ps-3 pb-0 m-0'>
+                                        <b>
+                                            Name:
+                                        </b>
+                                    </p>
+                                    <p className='text-start ps-3 pb-0 m-0'>
+                                        Nitish Kumar
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
