@@ -1,30 +1,67 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect } from "react";
+import AuthContext from "../Context/AuthProvider";
+import { Col, Container, Row, ToastContainer } from "react-bootstrap";
+import CartItem from "./CartItem/CartItem";
+import base_url from "../../api/bootapi";
+import { toast } from "react-toastify";
 
 export default function Cart() {
-  return (
-    <>
-      {auth ? (
-        <div>
-          <ToastContainer />
-          <h1 className="text-center my-2 border border-success border-5 bg-secondary bg-gradient">
-            Cart Page
-          </h1>
-          <Container>
-            <Row className="justify-content-center text-center">
-              <Col md={9}>
-                
-              </Col>
-              <Col md={3}>
-                
-              </Col>
-            </Row>
-          </Container>
-        </div>
-      ) : (
-        <section>
-          <h1>Redirecting to signIn page</h1>
-        </section>
-      )}
-    </>
-  );
+
+	const { cart, setCart, auth, user, cartPrice } = useContext(AuthContext)
+
+	useEffect(() => {
+		if (auth) {
+			axios.get(`${base_url}/cart/${user.id}/getCart`)
+				.then(
+					(response) => {
+						console.log(response.data)
+						setCart(response.data)
+						toast.success("cart items loaded successfully")
+					},
+					() => {
+						console.error("error")
+						toast.success("Error in getting cart item")
+					}
+				)
+		}
+	}, [])
+
+
+
+	return (
+		<>
+			{
+				auth ? (
+					<div>
+						<ToastContainer />
+						<h1 className="text-center my-2 border border-success border-5 bg-secondary bg-gradient">
+							Cart Page
+						</h1>
+						<Container>
+							<Row className="justify-content-center text-center">
+								<Col md={9}>
+									{cart.map((cartItem, index) => (
+										<CartItem key={index} cartItem={cartItem} />
+									))}
+								</Col>
+								<Col md={3}>
+									<div>
+										<h4>
+											Total price: Rs. {cartPrice}
+										</h4>
+										<span className="btn btn-primary">
+											Checkout
+										</span>
+									</div>
+								</Col>
+							</Row>
+						</Container>
+					</div>
+				) : (
+					<h1 className="text-center">Please signin to continue ...</h1>
+				)
+		}
+		</>
+	);
 }

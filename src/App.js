@@ -1,4 +1,4 @@
-import { AddProduct, Products, Navbar, Signup, Signin, Profile } from './components'
+import { AddProduct, Products, Navbar, Signup, Signin, Profile , Cart} from './components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -65,6 +65,14 @@ function App() {
 							<>
 							    <Navbar />
 								<Profile value="contactus"/>
+							</>
+						}
+					/>
+					<Route path='/getCart'
+						element = {
+							<>
+							    <Navbar />
+								<Cart />
 							</>
 						}
 					/>
