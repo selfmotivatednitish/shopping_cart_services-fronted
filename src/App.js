@@ -1,6 +1,5 @@
-import { AddProduct, Products, Navbar, Signup, Signin, Profile , Cart} from './components'
+import { Products, Navbar, Signup, Signin, Profile , Cart, ProductManage} from './components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
 
 function App() {
 	return (
@@ -15,10 +14,10 @@ function App() {
 							</>
 						}
 					/>
-					<Route path='/addProducts'
+					<Route path='/managePrduct'
 						element={
 							<>
-								<AddProduct />
+								<ProductManage />
 							</>
 						}
 					/>

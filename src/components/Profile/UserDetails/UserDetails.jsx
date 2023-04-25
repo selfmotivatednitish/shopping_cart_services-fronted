@@ -13,6 +13,7 @@ export default function UserDetails() {
                 <Col md={8} >
                     <Table className='mt-5' bordered>
                         <tbody>
+                            {/* name */}
                             <tr>
                                 <td>
                                     <Table className='m-0 p-0'>
@@ -38,6 +39,7 @@ export default function UserDetails() {
                                     </Table>
                                 </td>
                             </tr>
+                            {/* email */}
                             <tr>
                                 <td>
                                     <Table className='m-0 p-0'>
@@ -63,6 +65,7 @@ export default function UserDetails() {
                                     </Table>
                                 </td>
                             </tr>
+                            {/* phone number */}
                             <tr>
                                 <td>
                                     <Table className='m-0 p-0'>
@@ -71,7 +74,7 @@ export default function UserDetails() {
                                                 <td>
                                                     <p className='text-start ps-3 pb-0 m-0'>
                                                         <b>
-                                                            Mobile number:
+                                                            Phone number:
                                                         </b>
                                                     </p>
                                                     <p className='text-start ps-3 pb-0 m-0'>
@@ -88,6 +91,7 @@ export default function UserDetails() {
                                     </Table>
                                 </td>
                             </tr>
+                            {/* password */}
                             <tr>
                                 <td>
                                     <Table className='m-0 p-0'>

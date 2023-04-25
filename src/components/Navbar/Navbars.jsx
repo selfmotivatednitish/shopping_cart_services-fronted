@@ -1,14 +1,10 @@
 import {
-    Badge,
     Button,
     Container,
     Form,
     Nav,
     NavDropdown,
-    Navbar,
-    Tab,
-    Tabs,
-    ToastContainer,
+    Navbar
 } from "react-bootstrap";
 import { ShoppingCart } from "@mui/icons-material";
 import { LinkContainer } from "react-router-bootstrap";
@@ -18,9 +14,13 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import base_url from "../../api/bootapi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbars() {
-    const { auth, user, setProducts, setSearch, cartItemCount } = useContext(AuthContext);
+
+    const navigate = useNavigate()
+
+    const { auth, setAuth, setCartItemCount, setUser, user, setProducts, setSearch, cartItemCount } = useContext(AuthContext);
 
     const [searchItem, setSearchItem] = useState("");
 
@@ -73,12 +73,25 @@ export default function Navbars() {
         e.preventDefault();
     };
 
+    const logoutFunc = () => {
+        setAuth(false)
+        setUser({})
+        setCartItemCount(0)
+        alert("You has been successfully logout")
+        navigate("/")
+    }
+
     return (
         <>
+            {/* <ToastContainer /> */}
             <Navbar sticky="top" bg="light" expand="lg">
-                <ToastContainer />
                 <Container fluid>
-                    <Navbar.Brand href="#">Navbar</Navbar.Brand>
+                    <LinkContainer to="/">
+                        <Navbar.Brand href="#">
+                            <img className="mx-3 me-0" src="/icon.png" alt="ecommerce" style={{ height: "45px", width: "55px" }} />
+                            E-com
+                        </Navbar.Brand>
+                    </LinkContainer>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -107,8 +120,8 @@ export default function Navbars() {
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item eventKey="toys">Toys</NavDropdown.Item>
                             </NavDropdown>
-                            <LinkContainer to="/addProducts">
-                                <Nav.Link>Add Product</Nav.Link>
+                            <LinkContainer to="/managePrduct">
+                                <Nav.Link>Manage Product</Nav.Link>
                             </LinkContainer>
 
                             <Form onSubmit={searchHandle} className="d-flex">
@@ -143,9 +156,7 @@ export default function Navbars() {
                             </LinkContainer>
                         </Nav>
                         <Nav style={{ display: auth === true ? "block" : "none" }}>
-                            <LinkContainer to="/logout">
-                                <Nav.Link>Logout</Nav.Link>
-                            </LinkContainer>
+                                <Nav.Link onClick={logoutFunc}>Logout</Nav.Link>
                         </Nav>
                         <Nav>
                             <LinkContainer to="/profile">
@@ -155,24 +166,6 @@ export default function Navbars() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            {/* <Tabs
-        id="fill-tab-example"
-        className="mb-3"
-        fill
-      >
-        <Tab eventKey="home" title="Home">
-          
-        </Tab>
-        <Tab eventKey="profile" title="Profile">
-          
-        </Tab>
-        <Tab eventKey="longer-tab" title="Loooonger Tab">
-         
-        </Tab>
-        <Tab eventKey="contact" title="Contact" disabled>
-          
-        </Tab>
-      </Tabs> */}
         </>
     );
 }

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 export default function Cart() {
 
-	const { cart, setCart, auth, user, cartPrice } = useContext(AuthContext)
+	const { cart, cartItemCount, setCart, auth, user, cartPrice } = useContext(AuthContext)
 
 	useEffect(() => {
 		if (auth) {
@@ -27,41 +27,43 @@ export default function Cart() {
 		}
 	}, [])
 
-
-
 	return (
 		<>
 			{
 				auth ? (
-					<div>
-						<ToastContainer />
-						<h1 className="text-center my-2 border border-success border-5 bg-secondary bg-gradient">
-							Cart Page
-						</h1>
-						<Container>
-							<Row className="justify-content-center text-center">
-								<Col md={9}>
-									{cart.map((cartItem, index) => (
-										<CartItem key={index} cartItem={cartItem} />
-									))}
-								</Col>
-								<Col md={3}>
-									<div>
-										<h4>
-											Total price: Rs. {cartPrice}
-										</h4>
-										<span className="btn btn-primary">
-											Checkout
-										</span>
-									</div>
-								</Col>
-							</Row>
-						</Container>
-					</div>
+					cartItemCount === 0 ? (
+						<h1 className="text-center">No Item in cart go to home to add some items</h1>
+					) : (
+						<div>
+							<ToastContainer />
+							<h1 className="text-center my-2 border border-success border-5 bg-secondary bg-gradient">
+								Cart Page
+							</h1>
+							<Container>
+								<Row className="justify-content-center text-center">
+									<Col md={9}>
+										{cart.map((cartItem, index) => (
+											<CartItem key={index} cartItem={cartItem} />
+										))}
+									</Col>
+									<Col md={3}>
+										<div>
+											<h4>
+												Total price: Rs. {cartPrice}
+											</h4>
+											<span className="btn btn-primary">
+												Checkout
+											</span>
+										</div>
+									</Col>
+								</Row>
+							</Container>
+						</div>
+					)
 				) : (
 					<h1 className="text-center">Please signin to continue ...</h1>
 				)
-		}
+			}
 		</>
 	);
 }

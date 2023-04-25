@@ -28,7 +28,6 @@ const product = [
         "category": "toys",
         "subCategory": ["action figures", "dolls", "puzzles", "board games", "outdoor toys"]
     }
-
 ]
 
 export default function AddProduct() {
@@ -40,7 +39,7 @@ export default function AddProduct() {
     const [subCategories, setSubCategories] = useState([]);
     const [subCategory, setSubCategory] = useState([]);
 
-    const fetchCategories = () => {
+    useEffect(() => {
         let categories = []
         product.forEach(pd => {
             categories.push(pd.category);
@@ -48,10 +47,10 @@ export default function AddProduct() {
 
         console.log(categories)
         setCategories(categories);
-        // setCategory(categories[0])
-    }
-    
-    const fetchSubCategories = () => {
+        document.title = "Add Product"
+    }, [])
+
+    useEffect(() => {
         let subCategories = [];
         product.forEach((pd) => {
             if (pd.category === category) {
@@ -61,20 +60,11 @@ export default function AddProduct() {
         console.log(subCategories)
         setSubCategories(subCategories)
         setSubCategory(subCategories[0])
-    }
-    
-    useEffect(() => {
-        fetchCategories()
-        document.title = "Add Product"
-    }, [])
-    
-    useEffect(() => {
-        fetchSubCategories()
-        setProductItem({ ...productItem, category: category})
+        setProductItem({ ...productItem, category: category })
     }, [category])
 
     useEffect(() => {
-        setProductItem({ ...productItem, subcategory: subCategory})
+        setProductItem({ ...productItem, subcategory: subCategory })
     }, [subCategory])
 
     const imageChangeHandle = (event) => {
@@ -95,8 +85,6 @@ export default function AddProduct() {
 
     // product form submit handler
     const submitHandler = () => {
-
-        console.log(productItem)
 
         postProductToDb(productItem)
     }
@@ -119,8 +107,9 @@ export default function AddProduct() {
         <Form onSubmit={submitHandler} className='container'>
             <h1 className="text-center">Add a Product</h1>
             <hr />
+            {/* name input*/}
             <Row className='justify-content-center' >
-                <Col xs={8} md={4}>
+                <Col>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="name">Name: </Form.Label>
                         <Form.Control
@@ -136,8 +125,9 @@ export default function AddProduct() {
                     </Form.Group>
                 </Col>
             </Row>
+            {/* image input */}
             <Row className='justify-content-center' >
-                <Col xs={8} md={4}>
+                <Col>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="image">Image: </Form.Label>
                         <Form.Control
@@ -154,8 +144,9 @@ export default function AddProduct() {
                     </Form.Group>
                 </Col>
             </Row>
+            {/* description input */}
             <Row className='justify-content-center' >
-                <Col xs={8} md={4}>
+                <Col>
                     <Form.Group className="mb-3">
                         <Form.Label>Description: </Form.Label>
                         <Form.Control
@@ -168,8 +159,9 @@ export default function AddProduct() {
                     </Form.Group>
                 </Col>
             </Row>
+            {/* price */}
             <Row className='justify-content-center' >
-                <Col xs={8} md={4}>
+                <Col>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="price">Price: </Form.Label>
                         <Form.Control
@@ -185,8 +177,9 @@ export default function AddProduct() {
                     </Form.Group>
                 </Col>
             </Row>
+            {/* choose category */}
             <Row className='justify-content-center' >
-                <Col xs={8} md={4}>
+                <Col>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="category">Category: </Form.Label>
                         <Form.Select required id='category' onChange={(e) => setCategory(e.target.value)} aria-describedby='categoryHelpBlock'>
@@ -201,8 +194,9 @@ export default function AddProduct() {
                     </Form.Group>
                 </Col>
             </Row>
+            {/* choose subcategory */}
             <Row className='justify-content-center' >
-                <Col xs={8} md={4}>
+                <Col>
                     <Form.Group className="mb-3">
                         <Form.Label htmlFor="subCategory">Sub Category: </Form.Label>
                         <Form.Select multiple required id='subCategory' value={subCategory} onChange={(e) => setSubCategory([...subCategory, e.target.value])} aria-describedby='subCategoryHelpBlock'>
@@ -217,8 +211,9 @@ export default function AddProduct() {
                     </Form.Group>
                 </Col>
             </Row>
+            {/* add product */}
             <Row className='justify-content-center' >
-                <Col xs={8} md={4} >
+                <Col >
                     <Button variant="primary" type="submit">
                         Add Product
                     </Button>

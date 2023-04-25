@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { Row, Col, Carousel } from 'react-bootstrap'
 import Product from './Product/Product'
-import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import AuthContext from '../Context/AuthProvider'
 
@@ -58,7 +57,6 @@ export default function Products() {
                     </Col>
                 ))}
             </Row>
-            <ToastContainer />
         </main>
     )
 }

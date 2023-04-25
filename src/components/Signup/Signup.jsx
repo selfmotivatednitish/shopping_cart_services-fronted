@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import base_url from '../../api/bootapi'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 export default class Signup extends Component {
@@ -67,7 +67,6 @@ export default class Signup extends Component {
                     toast.error("Something went wrong")
                 }
             )
-
         event.preventDefault()
     }
 
@@ -155,7 +154,6 @@ export default class Signup extends Component {
                         </div>
                     </form>
                 </div>
-                <ToastContainer />
             </main>
         )
     }

@@ -15,12 +15,10 @@ export default function Product({ product }) {
     const { auth, user, cartItemCount, setCartItemCount } = useContext(AuthContext)
 
     const addToCartHandler = () => {
-        console.log("Add to cart button pressed")
         if (auth) {
             axios.get(`${base_url}/cart/${user.id}/add/${product.id}`)
                 .then(
-                    (response) => {
-                        console.log(response.data);
+                    () => {
                         setCartItemCount(cartItemCount + 1)
                         toast.success("Item added to cart successfully");
                     },
@@ -34,7 +32,30 @@ export default function Product({ product }) {
         }
     };
 
-    const buyNowHandler = () => { };
+    const buyNowHandler = () => {
+        let order = {
+            "quantity": 1,
+            "product": {
+                "id": product.id
+            }
+        }
+        if (auth) {
+            axios.post(`${base_url}/order/${user.id}/createOrder`, order)
+                .then(
+                    () => {
+                        toast.success("Item purchased ...")
+                    },
+                    (error) => {
+                        console.log(error)
+                        toast.error("Some thing went wrong")
+                    }
+                )
+        } 
+        else {
+            toast.warning("Login first to buy now")
+        }
+    }
+
 
     return (
         <Card style={{ width: "18rem" }}>
@@ -54,4 +75,4 @@ export default function Product({ product }) {
             </Card.Body>
         </Card>
     );
-}
+};

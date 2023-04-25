@@ -1,17 +1,20 @@
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import base_url from '../../api/bootapi'
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import AuthContext from '../Context/AuthProvider'
 import { Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 export default function Signin() {
 
+    const navigate = useNavigate()
+
     const [login, setLogin] = useState({})
 
-    const { setAuth, setUser, setCart } = useContext(AuthContext)
+    const { setAuth, setUser, setCart, setAddresses } = useContext(AuthContext)
 
     const handleSubmit = (event) => {
         console.log("submit button pressed")
@@ -23,7 +26,9 @@ export default function Signin() {
                     setAuth(true)
                     setUser(response?.data)
                     setCart(response?.data?.cartItems)
+                    setAddresses(response?.data?.addresses)
                     toast.success("Signin SuccessFull")
+                    navigate('/')
                 },
                 (error) => {
                     console.error(error)
@@ -65,7 +70,6 @@ export default function Signin() {
                     </LinkContainer>
                 </button>
             </div>
-            <ToastContainer />
         </main>
     )
 }
