@@ -121,9 +121,15 @@ export default function Navbars() {
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item eventKey="toys">Toys</NavDropdown.Item>
                             </NavDropdown>
-                            <LinkContainer to="/manageProduct">
-                                <Nav.Link>Manage Product</Nav.Link>
-                            </LinkContainer>
+                            {
+                                !auth ? (
+                                    <LinkContainer to="/manageProduct">
+                                        <Nav.Link>Manage Product</Nav.Link>
+                                    </LinkContainer>
+                                ) : (
+                                    <div></div>
+                                )
+                            }
 
                             <Form onSubmit={searchHandle} className="d-flex">
                                 <Form.Control

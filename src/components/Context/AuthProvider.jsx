@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { ToastContainer } from "react-bootstrap";
 
 const AuthContext = createContext({});
 
@@ -7,6 +8,7 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState({})
     const [addresses, setAddresses] = useState({})
     const [cart, setCart] = useState([])
+    const [orders, setOrders] = useState([])
     const [products, setProducts] = useState([])
     const [search, setSearch] = useState(false);
     const [cartItemCount, setCartItemCount] = useState(0)
@@ -25,11 +27,11 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{
-            auth, user, cart, products, search,cartItemCount, cartPrice, addresses,
-            setAuth, setUser, setCart, setProducts, setSearch, setCartItemCount, setCartPrice, setAddresses
+            auth, user, cart, products, search,cartItemCount, cartPrice, addresses, orders,
+            setAuth, setUser, setCart, setProducts, setSearch, setCartItemCount, setCartPrice, setAddresses, setOrders
         }}>
             {children}
-            {/* <ToastContainer /> */}
+            <ToastContainer />
         </AuthContext.Provider>
     )
 }
