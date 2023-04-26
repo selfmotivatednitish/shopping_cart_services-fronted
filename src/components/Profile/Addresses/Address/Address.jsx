@@ -18,6 +18,7 @@ export default function Address({ address }) {
         axios.post(`${base_url}/user/${user.id}/addAddress`, newAddress)
             .then(
                 (response) => {
+                    console.log(newAddress)
                     setAddresses(response?.data)
                     alert("address updated successfully")
                     handleClose()

@@ -7,18 +7,16 @@ export default function ProductManage() {
     return (
         <div>
             <h1 className="text-center my-2 border border-success border-5 bg-secondary bg-gradient">
-                Profile Page
+                Add Product Page
             </h1>
-            <Container>
-                <Row className="justify-content-center text-center">
-                    <Col md={6}>
-                        <AddProduct />
-                    </Col>
-                    <Col md={6}>
-                        <EditProduct />
-                    </Col>
-                </Row>
-            </Container>
+            <Row className="justify-content-center m-0 text-center">
+                <Col className='ps-5' md={4}>
+                    <AddProduct />
+                </Col>
+                <Col md={8}>
+                    <EditProduct />
+                </Col>
+            </Row>
         </div>
     )
 }

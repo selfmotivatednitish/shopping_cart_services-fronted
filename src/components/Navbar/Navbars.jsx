@@ -42,17 +42,18 @@ export default function Navbars() {
         if (key !== "search") setSearchItem("");
 
         document.title = key;
-        axios.get(urlFinal).then(
-            (response) => {
-                setProducts(response.data);
-                toast.success(key);
-            },
-            (error) => {
-                console.log(error);
-                console.log("Failure");
-                toast.error("Something went wrong ...");
-            }
-        );
+        axios.get(urlFinal)
+            .then(
+                (response) => {
+                    setProducts(response.data);
+                    toast.success(key);
+                },
+                (error) => {
+                    console.log(error);
+                    console.log("Failure");
+                    toast.error("Something went wrong ...");
+                }
+            );
     };
 
     const searchHandle = (e) => {
@@ -120,7 +121,7 @@ export default function Navbars() {
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item eventKey="toys">Toys</NavDropdown.Item>
                             </NavDropdown>
-                            <LinkContainer to="/managePrduct">
+                            <LinkContainer to="/manageProduct">
                                 <Nav.Link>Manage Product</Nav.Link>
                             </LinkContainer>
 
@@ -156,7 +157,7 @@ export default function Navbars() {
                             </LinkContainer>
                         </Nav>
                         <Nav style={{ display: auth === true ? "block" : "none" }}>
-                                <Nav.Link onClick={logoutFunc}>Logout</Nav.Link>
+                            <Nav.Link onClick={logoutFunc}>Logout</Nav.Link>
                         </Nav>
                         <Nav>
                             <LinkContainer to="/profile">

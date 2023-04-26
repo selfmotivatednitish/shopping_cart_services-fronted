@@ -1,8 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import Product from '../EditProduct/Product/Product'
+import { Col, Row } from 'react-bootstrap';
+import base_url from '../../../api/bootapi';
 
 export default function EditProduct() {
-  return (
-    <div>EditProduct</div>
-  )
+
+	const [products, setProducts] = useState([])
+
+	const fetchAllProducts = () => {
+		axios.get(`${base_url}/products`)
+			.then(
+				(response) => {
+					setProducts(response?.data)
+				},
+				(error) => {
+					console.log(error);
+					console.log("Failure")
+				}
+			)
+	}
+
+	useEffect(() => {
+		fetchAllProducts()
+	}, [])
+
+	return (
+		<Row className='justify-content-center m-0'>
+			{products.map((product, index) => (
+				<Col className='m-2' key={product.id}>
+					<Product key={index} product={product} />
+				</Col>
+			))}
+		</Row>
+	)
 }
 
