@@ -52,6 +52,27 @@ export default function CartItem({ cartItem }) {
         }
     }
 
+    const modCartItem = (action) => {
+        console.log(action)
+        if (auth) {
+            if (cartItem.quantity === 1 && action === "decrquant") {
+                removeCartItemHandler()
+            }
+            else {
+                axios.put(`${base_url}/cart/cartItem/${cartItem.id}/${action}`)
+                    .then(
+                        (response) => {
+                            setCart(response?.data)
+                            console.log("success")
+                        },
+                        (error) => {
+                            console.log(error)
+                        }
+                    )
+            }
+        }
+    }
+
     return (
         <Card className='m-3'>
             <Card.Body>
@@ -66,12 +87,36 @@ export default function CartItem({ cartItem }) {
                         </p>
                         <Row>
                             <Col>
-                                <p className='text-start'>
+                                <p className='text-start mb-0'>
                                     <b>Quantity: </b>
                                     <span>{
                                         cartItem.quantity
                                     }</span>
                                 </p>
+                                <div className="input-group w-auto align-items-center">
+                                    <input
+                                        type="button"
+                                        value="-"
+                                        className="button-minus border rounded-circle  icon-shape icon-sm mx-1 "
+                                        data-field="quantity"
+                                        onClick={() => modCartItem("decrquant")}
+                                    />
+                                    <input
+                                        type="number"
+                                        disabled step="1"
+                                        max="10"
+                                        value={cartItem.quantity}
+                                        name="quantity"
+                                        className="quantity-field border-0 text-center w-25"
+                                    />
+                                    <input
+                                        type="button"
+                                        value="+"
+                                        className="button-plus border rounded-circle icon-shape icon-sm "
+                                        data-field="quantity"
+                                        onClick={() => modCartItem("incrquant")}
+                                    />
+                                </div>
                             </Col>
                             <Col>
                                 <p className='text-start'>
@@ -88,7 +133,7 @@ export default function CartItem({ cartItem }) {
                         <Button className='btn-sm' onClick={removeCartItemHandler} variant='danger'>Remove</Button>
                     </Col>
                 </Row>
-            </Card.Body>
-        </Card>
+            </Card.Body >
+        </Card >
     )
 }
