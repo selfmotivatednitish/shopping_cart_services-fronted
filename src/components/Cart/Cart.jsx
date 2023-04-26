@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 export default function Cart() {
 
-	const { cart, cartItemCount, setCart, auth, user, cartPrice } = useContext(AuthContext)
+	const { cart, cartItemCount, setCart, setOrder, auth, user, cartPrice } = useContext(AuthContext)
 
 	useEffect(() => {
 		if (auth) {
@@ -26,6 +26,21 @@ export default function Cart() {
 				)
 		}
 	}, [])
+
+	const checkoutHandle = () => {
+		if(auth) {
+			axios.post(`${base_url}/order/${user.id}/checkout`)
+			.then(
+				(response) => {
+					setCart([])
+					setOrder(response?.data)
+				},
+				(error) => {
+					alert(error + "something went wrong")
+				}
+			)
+		}
+	}
 
 	return (
 		<>
@@ -51,7 +66,7 @@ export default function Cart() {
 											<h4>
 												Total price: Rs. {cartPrice}
 											</h4>
-											<span className="btn btn-primary">
+											<span className="btn btn-primary" onClick={checkoutHandle}>
 												Checkout
 											</span>
 										</div>
