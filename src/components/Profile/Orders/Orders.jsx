@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Accordion } from 'react-bootstrap'
 import Order from './Order/Order'
 import AuthContext from '../../Context/AuthProvider'
@@ -7,8 +7,7 @@ import base_url from '../../../api/bootapi'
 
 export default function Orders() {
 
-    const { auth, user } = useContext(AuthContext)
-    const [orders, setOrders] = useState([])
+    const { auth, orders, setOrders, user } = useContext(AuthContext)
 
     useEffect(() => {
         if (auth) {
@@ -22,7 +21,7 @@ export default function Orders() {
                     }
                 )
         }
-    }, [auth, user.id])
+    }, [auth, user.id, setOrders])
 
     return (
         <div className='justify-content-center'>
