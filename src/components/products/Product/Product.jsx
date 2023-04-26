@@ -61,9 +61,9 @@ export default function Product({ product }) {
         <Card style={{ width: "18rem" }}>
             <Card.Img variant="top" src={image} />
             <Card.Body>
-                <Card.Title>{product.name}</Card.Title>
+                <Card.Title className="text-truncate">{product.name}</Card.Title>
                 <Card.Text>{product.price}</Card.Text>
-                <Card.Text>{product.description}</Card.Text>
+                <Card.Text className="text-truncate">{product.description}</Card.Text>
                 <div className="d-flex justify-content-between">
                     <Button onClick={addToCartHandler} variant="primary">
                         <AddShoppingCart />
