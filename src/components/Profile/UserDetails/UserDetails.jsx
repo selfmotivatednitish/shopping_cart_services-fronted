@@ -15,7 +15,7 @@ export default function UserDetails() {
         password: "",
         phone: user.phone
     })
-    
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleSave = () => {
@@ -55,11 +55,6 @@ export default function UserDetails() {
                                                         {user.name}
                                                     </p>
                                                 </td>
-                                                <td className='align-middle justify-content-center'>
-                                                    <Button variant="outline-warning">
-                                                        Edit
-                                                    </Button>{' '}
-                                                </td>
                                             </tr>
                                         </tbody>
                                     </Table>
@@ -80,11 +75,6 @@ export default function UserDetails() {
                                                     <p className='text-start ps-3 pb-0 m-0'>
                                                         {user.email}
                                                     </p>
-                                                </td>
-                                                <td className='align-middle justify-content-center'>
-                                                    <Button variant="outline-warning">
-                                                        Edit
-                                                    </Button>{' '}
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -107,11 +97,6 @@ export default function UserDetails() {
                                                         {user.phone}
                                                     </p>
                                                 </td>
-                                                <td className='align-middle justify-content-center'>
-                                                    <Button variant="outline-warning">
-                                                        Edit
-                                                    </Button>{' '}
-                                                </td>
                                             </tr>
                                         </tbody>
                                     </Table>
@@ -132,11 +117,6 @@ export default function UserDetails() {
                                                     <p className='text-start ps-3 pb-0 m-0'>
                                                         *********
                                                     </p>
-                                                </td>
-                                                <td className='align-middle justify-content-center'>
-                                                    <Button variant="outline-warning">
-                                                        Edit
-                                                    </Button>{' '}
                                                 </td>
                                             </tr>
                                         </tbody>
