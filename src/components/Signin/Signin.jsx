@@ -17,10 +17,16 @@ export default function Signin() {
     const { setAuth, setUser, setCart, setAddresses } = useContext(AuthContext)
 
     const handleSubmit = (event) => {
-        console.log("submit button pressed")
-        console.log(login)
 
-        axios.post(`${base_url}/user/login`, login)
+        const encodedText = encodeURIComponent(setLogin.password);
+        const base64Text = btoa(encodedText);
+
+        let finalLoginData = {
+            ...login,
+            password: base64Text
+        }
+
+        axios.post(`${base_url}/user/login`, finalLoginData)
             .then(
                 (response) => {
                     setAuth(true)

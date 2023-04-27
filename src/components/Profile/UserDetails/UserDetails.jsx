@@ -19,7 +19,16 @@ export default function UserDetails() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const handleSave = () => {
-        axios.put(`${base_url}/user/update`, modUser)
+
+        const encodedText = encodeURIComponent(modUser.password);
+        const base64Text = btoa(encodedText);
+
+        let finalUser = {
+            ...modUser,
+            password: base64Text
+        }
+
+        axios.put(`${base_url}/user/update`, finalUser)
             .then(
                 (response) => {
                     setUser(response?.data)
