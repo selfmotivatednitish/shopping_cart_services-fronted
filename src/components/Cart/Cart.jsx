@@ -15,7 +15,6 @@ export default function Cart() {
 			axios.get(`${base_url}/cart/${user.id}/getCart`)
 				.then(
 					(response) => {
-						console.log(response.data)
 						setCart(response.data)
 						toast.success("cart items loaded successfully")
 					},

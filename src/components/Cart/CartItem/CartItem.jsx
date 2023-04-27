@@ -4,10 +4,13 @@ import AuthContext from '../../Context/AuthProvider'
 import axios from 'axios'
 import base_url from '../../../api/bootapi'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 export default function CartItem({ cartItem }) {
 
-    const { user, auth, cart, setCart } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const { user, setProductId, auth, cart, setCart } = useContext(AuthContext)
 
     const product = cartItem.product
     const image = "data:image/png;base64," + product.image
@@ -73,15 +76,20 @@ export default function CartItem({ cartItem }) {
         }
     }
 
+    const productViewHandler = () => {
+        setProductId(product.id)
+        navigate("/product/view")
+    }
+
     return (
         <Card className='m-3'>
             <Card.Body>
                 <Row>
-                    <Col md={2}>
+                    <Col onClick={productViewHandler} md={2}>
                         <img src={image} alt="" style={{ width: "100px", height: "100px" }} />
                     </Col>
                     <Col md={8}>
-                        <Card.Title className='text-start'>{cartItem.product.name}</Card.Title>
+                        <Card.Title onClick={productViewHandler} className='text-start'>{cartItem.product.name}</Card.Title>
                         <p className='text-start text-truncate'>
                             <small>{product.description}</small>
                         </p>
