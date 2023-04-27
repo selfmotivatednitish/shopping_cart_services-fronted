@@ -1,4 +1,4 @@
-import { Products, Navbar, Signup, Signin, Profile , Cart, ProductManage} from './components'
+import { Products, Navbar, Signup, Signin, Profile , Cart, ProductManage, ProductView} from './components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -72,6 +72,14 @@ function App() {
 							<>
 							    <Navbar />
 								<Cart />
+							</>
+						}
+					/>
+					<Route path='/product/view'
+						element = {
+							<>
+							    <Navbar />
+								<ProductView />
 							</>
 						}
 					/>
