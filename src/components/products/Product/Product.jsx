@@ -8,15 +8,22 @@ import axios from "axios";
 import base_url from "../../../api/bootapi";
 import { toast } from "react-toastify";
 import AuthContext from "../../Context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function Product({ product }) {
     const image = "data:image/png;base64," + product.image
+    const navigate = useNavigate()
 
-    const { auth, user, cartItemCount, setCartItemCount } = useContext(AuthContext)
+    const { auth, setProductId, user, cartItemCount, setCartItemCount } = useContext(AuthContext)
+
+    const productViewHandler = () => {
+        setProductId(product.id)
+        navigate("/product/view")
+    }
 
     const addToCartHandler = () => {
         if (auth) {
-            axios.get(`${base_url}/cart/${user.id}/add/${product.id}`)
+            axios.get(`${base_url}/cart/${user.id}/add/${product.id}/1`)
                 .then(
                     () => {
                         setCartItemCount(cartItemCount + 1)
@@ -59,7 +66,7 @@ export default function Product({ product }) {
 
     return (
         <Card style={{ width: "18rem" }}>
-            <Card.Img variant="top" src={image} />
+            <Card.Img onClick={productViewHandler} variant="top" src={image} />
             <Card.Body>
                 <Card.Title className="text-truncate">{product.name}</Card.Title>
                 <Card.Text>{product.price}</Card.Text>

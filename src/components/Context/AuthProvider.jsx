@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
     const [search, setSearch] = useState(false);
     const [cartItemCount, setCartItemCount] = useState(0)
     const [cartPrice, setCartPrice] = useState(0)
+    const [prouductId, setProductId] = useState(0)
 
     useEffect(() => {
         let count = 0
@@ -27,8 +28,10 @@ export const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{
-            auth, user, cart, products, search,cartItemCount, cartPrice, addresses, orders,
-            setAuth, setUser, setCart, setProducts, setSearch, setCartItemCount, setCartPrice, setAddresses, setOrders
+            auth, user, cart, products, search,cartItemCount, cartPrice, 
+            addresses, orders, prouductId,
+            setAuth, setUser, setCart, setProducts, setSearch, setCartItemCount, setCartPrice, 
+            setAddresses, setOrders, setProductId
         }}>
             {children}
             <ToastContainer />

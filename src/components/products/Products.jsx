@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Row, Col, Carousel } from 'react-bootstrap'
+import React, { useContext, useState } from 'react'
+import { Row, Col, Carousel, Button, Offcanvas } from 'react-bootstrap'
 import Product from './Product/Product'
 import 'react-toastify/dist/ReactToastify.css'
 import AuthContext from '../Context/AuthProvider'
@@ -7,6 +7,10 @@ import AuthContext from '../Context/AuthProvider'
 export default function Products() {
 
     const { search, products } = useContext(AuthContext)
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const productItems = products
 
@@ -50,13 +54,33 @@ export default function Products() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <Row className='justify-content-center'>
+            <Row className='d-flex pt-3 ps-5 justify-content-start'>
+                <Col md={2}>
+                    <Button variant="primary" onClick={handleShow}>
+                        Use Filter
+                    </Button>
+                </Col>
+            </Row>
+            <Row className='justify-content-center ps-5 ms-5'>
                 {productItems.map((product, index) => (
                     <Col className='m-2' key={product.id} xs={8} sm='6' md='4' lg='3'>
                         <Product key={index} product={product} />
                     </Col>
                 ))}
             </Row>
+            <Offcanvas
+                show={show}
+                onHide={handleClose}
+                backdrop="static"
+                scroll={true}
+            >
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Choose Filter</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                    <b></b>
+                </Offcanvas.Body>
+            </Offcanvas>
         </main>
     )
 }
