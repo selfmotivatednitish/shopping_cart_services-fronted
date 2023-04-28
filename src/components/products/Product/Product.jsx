@@ -66,7 +66,7 @@ export default function Product({ product }) {
 
     return (
         <Card style={{ width: "18rem" }}>
-            <Card.Img onClick={productViewHandler} variant="top" src={image} />
+            <Card.Img onClick={productViewHandler} style={{cursor: "pointer"}} variant="top" src={image} />
             <Card.Body>
                 <Card.Title className="text-truncate">{product.name}</Card.Title>
                 <Card.Text>{product.price}</Card.Text>

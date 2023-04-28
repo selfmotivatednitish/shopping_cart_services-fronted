@@ -85,11 +85,11 @@ export default function CartItem({ cartItem }) {
         <Card className='m-3'>
             <Card.Body>
                 <Row>
-                    <Col onClick={productViewHandler} md={2}>
+                    <Col onClick={productViewHandler} md={2} style={{ cursor: "pointer" }}>
                         <img src={image} alt="" style={{ width: "100px", height: "100px" }} />
                     </Col>
                     <Col md={8}>
-                        <Card.Title onClick={productViewHandler} className='text-start'>{cartItem.product.name}</Card.Title>
+                        <Card.Title onClick={productViewHandler} className='text-start' style={{ cursor: "pointer" }}>{cartItem.product.name}</Card.Title>
                         <p className='text-start text-truncate'>
                             <small>{product.description}</small>
                         </p>

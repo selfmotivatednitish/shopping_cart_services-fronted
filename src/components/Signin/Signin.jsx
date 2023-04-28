@@ -30,6 +30,7 @@ export default function Signin() {
             .then(
                 (response) => {
                     setAuth(true)
+                    localStorage.setItem("userId", response?.data?.id)
                     setUser(response?.data)
                     setCart(response?.data?.cartItems)
                     setAddresses(response?.data?.addresses)

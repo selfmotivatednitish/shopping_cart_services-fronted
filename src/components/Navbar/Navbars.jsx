@@ -75,6 +75,7 @@ export default function Navbars() {
     };
 
     const logoutFunc = () => {
+        localStorage.removeItem("userId")
         setAuth(false)
         setUser({})
         setCartItemCount(0)

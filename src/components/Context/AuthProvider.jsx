@@ -1,9 +1,12 @@
+import axios from "axios";
 import { createContext, useState, useEffect } from "react";
 import { ToastContainer } from "react-bootstrap";
+import base_url from "../../api/bootapi";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
+
     const [auth, setAuth] = useState(false)
     const [user, setUser] = useState({})
     const [addresses, setAddresses] = useState({})
@@ -24,13 +27,31 @@ export const AuthProvider = ({ children }) => {
         })
         setCartItemCount(count)
         setCartPrice(price)
-	}, [cart])
+    }, [cart])
+
+    useEffect(() => {
+        if (localStorage.getItem("userId")) {
+            axios.get(`${base_url}/user/getprofile/${localStorage.getItem("userId")}`)
+                .then(
+                    (response) => {
+                        setAuth(true)
+                        localStorage.setItem("userId", response?.data?.id)
+                        setUser(response?.data)
+                        setCart(response?.data?.cartItems)
+                        setAddresses(response?.data?.addresses)
+                    },
+                    (error) => {
+                        console.error(error)
+                    }
+                )
+        }
+    }, [])
 
     return (
         <AuthContext.Provider value={{
-            auth, user, cart, products, search,cartItemCount, cartPrice, 
+            auth, user, cart, products, search, cartItemCount, cartPrice,
             addresses, orders, prouductId,
-            setAuth, setUser, setCart, setProducts, setSearch, setCartItemCount, setCartPrice, 
+            setAuth, setUser, setCart, setProducts, setSearch, setCartItemCount, setCartPrice,
             setAddresses, setOrders, setProductId
         }}>
             {children}

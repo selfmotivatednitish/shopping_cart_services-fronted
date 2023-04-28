@@ -1,5 +1,6 @@
 import { Products, Navbar, Signup, Signin, Profile , Cart, ProductManage, ProductView} from './components'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import './App.css'
 
 function App() {
 	return (
