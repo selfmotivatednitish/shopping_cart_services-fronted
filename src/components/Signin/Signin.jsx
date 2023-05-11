@@ -14,26 +14,15 @@ export default function Signin() {
 
     const [login, setLogin] = useState({})
 
-    const { setAuth, setUser, setCart, setAddresses } = useContext(AuthContext)
+    const { setAuth } = useContext(AuthContext)
 
     const handleSubmit = (event) => {
 
-        const encodedText = encodeURIComponent(setLogin.password);
-        const base64Text = btoa(encodedText);
-
-        let finalLoginData = {
-            ...login,
-            password: base64Text
-        }
-
-        axios.post(`${base_url}/user/login`, finalLoginData)
+        axios.post(`${base_url}/user/login`, login)
             .then(
                 (response) => {
                     setAuth(true)
-                    localStorage.setItem("userId", response?.data?.id)
-                    setUser(response?.data)
-                    setCart(response?.data?.cartItems)
-                    setAddresses(response?.data?.addresses)
+                    localStorage.setItem("auth", response?.data)
                     toast.success("Signin SuccessFull")
                     navigate('/')
                 },

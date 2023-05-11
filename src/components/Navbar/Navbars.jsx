@@ -37,10 +37,6 @@ export default function Navbars() {
             setSearch(false);
         }
 
-        if (key === "search") urlFinal += "/search/" + searchItem;
-
-        if (key !== "search") setSearchItem("");
-
         document.title = key;
         axios.get(urlFinal)
             .then(
@@ -56,9 +52,8 @@ export default function Navbars() {
             );
     };
 
-    const searchHandle = (e) => {
-        console.log("serach Click");
-        if (searchItem !== "")
+    const searchHandle = () => {
+        if (searchItem !== "") {
             axios.get(`${base_url}/products/search/${searchItem}`).then(
                 (response) => {
                     setProducts(response.data);
@@ -71,11 +66,11 @@ export default function Navbars() {
                     toast.error("Something went wrong ...");
                 }
             );
-        e.preventDefault();
+        }
     };
 
     const logoutFunc = () => {
-        localStorage.removeItem("userId")
+        localStorage.removeItem("auth")
         setAuth(false)
         setUser({})
         setCartItemCount(0)
@@ -123,7 +118,7 @@ export default function Navbars() {
                                 <NavDropdown.Item eventKey="toys">Toys</NavDropdown.Item>
                             </NavDropdown>
                             {
-                                !auth ? (
+                                user?.roles === "ROLE_ADMIN" ? (
                                     <LinkContainer to="/manageProduct">
                                         <Nav.Link>Manage Product</Nav.Link>
                                     </LinkContainer>
@@ -132,7 +127,7 @@ export default function Navbars() {
                                 )
                             }
 
-                            <Form onSubmit={searchHandle} className="d-flex">
+                            <Form className="d-flex">
                                 <Form.Control
                                     type="search"
                                     placeholder="Search"
@@ -142,7 +137,7 @@ export default function Navbars() {
                                         setSearchItem(e.target.value);
                                     }}
                                 />
-                                <Button variant="outline-success">Search</Button>
+                                <Button onClick={searchHandle} variant="outline-success">Search</Button>
                             </Form>
                         </Nav>
                         <div className="pe-3">

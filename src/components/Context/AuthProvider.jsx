@@ -30,12 +30,19 @@ export const AuthProvider = ({ children }) => {
     }, [cart])
 
     useEffect(() => {
-        if (localStorage.getItem("userId")) {
-            axios.get(`${base_url}/user/getprofile/${localStorage.getItem("userId")}`)
+        if (localStorage.getItem("auth")) {
+            const authAxios = axios.create({
+                baseURL: base_url,
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("auth")}`
+                }
+            })
+
+            authAxios.get('/user/getprofile')
                 .then(
                     (response) => {
                         setAuth(true)
-                        localStorage.setItem("userId", response?.data?.id)
+                        console.log(response?.data)
                         setUser(response?.data)
                         setCart(response?.data?.cartItems)
                         setAddresses(response?.data?.addresses)

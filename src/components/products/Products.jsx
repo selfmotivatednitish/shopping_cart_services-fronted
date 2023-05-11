@@ -54,20 +54,26 @@ export default function Products() {
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>
-            <Row className='d-flex pt-3 ps-5 justify-content-start'>
+            {/* <Row className='d-flex pt-3 ps-5 justify-content-start'>
                 <Col md={2}>
                     <Button variant="primary" onClick={handleShow}>
                         Use Filter
                     </Button>
                 </Col>
-            </Row>
-            <Row className='justify-content-center ps-5 ms-5'>
-                {productItems.map((product, index) => (
-                    <Col className='m-2' key={product.id} xs={8} sm='6' md='4' lg='3'>
-                        <Product key={index} product={product} />
-                    </Col>
-                ))}
-            </Row>
+            </Row> */}
+            {
+                products !== [] ? (
+                    <Row className='justify-content-center ps-5 ms-5'>
+                        {productItems.map((product, index) => (
+                            <Col className='m-2' key={product.id} xs={8} sm='6' md='4' lg='3'>
+                                <Product key={index} product={product} />
+                            </Col>
+                        ))}
+                    </Row>
+                ) : (
+                    <h1>Product has been not listed yet</h1>
+                )
+            }
             <Offcanvas
                 show={show}
                 onHide={handleClose}

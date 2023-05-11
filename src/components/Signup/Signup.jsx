@@ -50,13 +50,11 @@ export default class Signup extends Component {
 
         if (passErr !== "" || confErr !== "") return
 
-        const encodedText = encodeURIComponent(this.state.password);
-        const base64Text = btoa(encodedText);
 
         const signupData = {
             "name": this.state.fName + " " + this.state.lName,
             "email": this.state.email,
-            "password": base64Text
+            "password": this.state.password
         }
 
         axios.post(`${base_url}/user/signup`, signupData)
